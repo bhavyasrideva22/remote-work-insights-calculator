@@ -64,9 +64,13 @@ const ROIChart = ({ data, results }: ROIChartProps) => {
           />
           <Tooltip 
             formatter={(value, name) => {
-              if (name === 'ROI') return [`${value.toFixed(2)}%`, name];
-              if (name === 'Productivity Change') return [`${value.toFixed(2)}%`, name];
-              return [formatCurrency(value as number), name];
+              if (name === 'ROI') {
+                return [`${typeof value === 'number' ? value.toFixed(2) : value}%`, name];
+              }
+              if (name === 'Productivity Change') {
+                return [`${typeof value === 'number' ? value.toFixed(2) : value}%`, name];
+              }
+              return [formatCurrency(Number(value)), name];
             }}
             contentStyle={{ backgroundColor: '#fff', borderRadius: '0.25rem' }}
           />
